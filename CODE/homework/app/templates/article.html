@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}文章列表{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>文章列表</h1>
+</div>
+{% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+<h2 text-align: center;>待审核文章</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>标题</th>
+      <th>上传人</th>
+      <th class="fr">删除</th>
+      <th class="fr">通过</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for x in titles %}
+    <tr>
+      <td><a href="{{url_for('article.download',filename=x.title)}}">{{ x.title }}</a></td>
+      <td>{{x.person.username}}</td>
+      <td class="fr"><a href="{{url_for('article.delete_article',filename=x.title)}}">删除</a></td>
+      <td class="fr"><a href="{{url_for('article.verify',id=x.id)}}">通过</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+<h2 text-align: center;>审核通过文章</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>标题</th>
+      <th>上传人</th>
+      <th>关于</th>
+      <th class="fr">上传时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for x in titles1 %}
+    <tr>
+      <td><a href="{{url_for('article.download',filename=x.title)}}">{{ x.title }}</a></td>
+      <td>{{x.person.username}}</td>
+      <td>{{ x.about }}</td>
+      <td class="fr">{{ x.uploadtime }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

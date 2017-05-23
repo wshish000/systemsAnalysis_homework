@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}关于项目{% endblock %}
+{% block page_content %}
+
+<div class="row">
+<div style="margin: 15px 5px 15px 5px;" text-align="left">
+<div class="col-md-3" style="height:500px;overflow-x:hidden;text-align:left;float:left;white-space:nowrap;text-overflow:ellipsis;">
+<ul>
+{% for x in projects %}
+<li><h5><a id="gotop" href="#{{ x.name }}">{{ x.name }}</a></h5></li>
+{% endfor %}
+</ul>
+</div>
+<!-- 代码开始 -->
+<div class="col-md-9" style="height:500px;overflow:auto;">
+{% for x in projects %}
+<a name="{{ x.name }}"></a>
+<div style="height:900px;">
+<h2 style="text-align:center;">{{ x.name }}</h2>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>信息介绍</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ x.introduction }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>开始时间</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ x.starttime.year }}-{{ x.starttime.month }}-{{ x.starttime.day }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>研究团队</h3>
+    </div>
+    <div class="col-md-10">
+        <!--<p class="project-introduction-paragraph">{{ x.progress }}</p>-->
+        {% for z in x.team %}
+        <h3>{{ z.name }}</h3>
+        {% endfor %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <h3>项目进展</h3>
+    </div>
+    <div class="col-md-10">
+        <!--<p class="project-introduction-paragraph">{{ x.progress }}</p>-->
+        <h3>{{ x.progress }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <h3>相关文章</h3>
+    </div>
+    <div class="col-md-10">
+        {% for u in article %}
+        {% if u.about == x.name %}
+        <h3><a href="{{ u.link }}" target="_blank">{{ u.title }}</a></h3>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<br>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

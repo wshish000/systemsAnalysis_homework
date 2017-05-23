@@ -1,0 +1,209 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}首页{% endblock %}
+{% block head %}
+{{ super() }}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel='icon' href='static/pics/logo.jpg' type='image/x-ico' /> 
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link href="static/custom_css/index.css" rel="stylesheet">
+    
+{% endblock %}
+
+{% block body %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+
+        
+        <div class="col-md-2 logo">
+          <img src="static/pics/logo.jpg" height="130">
+        </div>
+        <div class="col-md-10">
+          <p class="chn-title"><b>国家重点研发计划——重要热带病传播相关的入侵媒介及其病原体的生物学特性研究</b></p>
+          <div class="row">
+            <div class="col-md-9 eng-title">
+              <p><b>National Research and Development Plan: Research on Biological Characteristics of the Tropical Disease Related Invasion vectors and Pathogens</b><p>
+            </div>
+            <div class="col-md-3 search-box">
+              <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                  <input type="text" class="  search-query form-control" placeholder="搜索" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button">
+                      <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        
+
+
+
+          <!-- <div class="col-md-3 search-box">
+            <div class="row">
+              <div class="col-md-offset-1 col-md-11">
+
+                <div id="custom-search-input">
+                  <div class="input-group col-md-12">
+                    <input type="text" class="  search-query form-control" placeholder="搜索" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-danger" type="button">
+                        <span class=" glyphicon glyphicon-search"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div> -->
+      </div>
+
+      <div class="container">
+        <div class="blog-masthead">
+          <div class="row">
+            <div class="col-md-10 ">
+              <nav class="blog-nav" >
+                <a class="blog-nav-item active" href="{{ url_for('main.index') }}">首页</a>
+                <a class="blog-nav-item" href="{{ url_for('project.show_project') }}">关于项目</a>
+                <a class="blog-nav-item" href="{{ url_for('team.show_team') }}">研究团队</a>
+                <a class="blog-nav-item" href="{{ url_for('project.show_project') }}">项目进展</a>
+                <a class="blog-nav-item" href="{{ url_for('article.articles') }}">发表文章</a>
+                <a class="blog-nav-item" href="{{ url_for('conference.show_conference') }}">学术交流</a>
+                <a class="blog-nav-item" href="http://www.chinaias.cn/wjPart/index.aspx">链接</a>
+              </nav>
+            </div>
+            <div class="col-md-2">
+              {% if current_user.is_authenticated %}
+                <a class="blog-nav-item dropdown-toggle" href="#" data-toggle="dropdown">个人中心<b class="caret"></b></a>
+                <ul class="dropdown-menu depth_0">
+                    {% if current_user.authorization == "superad" %}
+                      <li><a href="{{ url_for('main.show_user') }}">用户管理</a></li>
+                    {% endif %}
+                    {% if current_user.authorization == "generalad" %}
+                      <li><a href="{{ url_for('main.show_user') }}">用户管理</a></li>
+                      <li><a href="{{ url_for('team.manage_team') }}">团队管理</a></li>
+                      <li><a href="{{ url_for('project.manage_project') }}">课题管理</a></li>
+                      <li><a href="{{ url_for('article.articles') }}">文章管理</a></li>
+                      <li><a href="{{ url_for('news.show_news') }}">新闻管理</a></li>
+                      <li><a href="{{ url_for('conference.manage_conference') }}">会议管理</a></li>
+                      <li><a href="{{ url_for('notice.show_notice') }}">公告管理</a></li>
+                    {% endif %}
+                    {% if current_user.authorization == "labuser" %}
+                      <li><a href="{{ url_for('article.upload') }}">文章上传</a></li>
+                    {% endif %}
+                    {% if current_user.authorization == "registeruser" %}
+                      <li><a href="{{ url_for('main.upgrade') }}">申请权限提升</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('main.edit_profile',username=current_user.username) }}">编辑个人信息</a></li>
+                    <li><a href="{{ url_for('main.modify_password') }}">修改密码</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">退出</a></li>
+
+                </ul>
+              {% else %}
+                <a class="blog-nav-item" href="{{ url_for('auth.login') }}">登录</a>
+              {% endif %}
+              </div>
+                <!--<ul class=" nav navbar-right">
+
+
+                  {% if current_user.is_authenticated %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Account <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="blog-nav-item"href="#">Change Password</a></li>
+                        <li><a class="blog-nav-item" href="#">Change Email</a></li>
+                        <li><a class="blog-nav-item" href="#">Log Out</a></li>
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li><a class="blog-nav-item" href="{{ url_for('auth.login') }}">Log In</a></li>
+                  {% endif %}
+                </ul> -->
+              <!--</nav>
+            </div>-->
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% block page_content %}{% endblock %}
+    </div>
+    
+    <div class="container">
+      <hr>
+      <footer class="footer">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="col-sm-7 project-introduction">
+              <p><b>相关链接</b></p>
+              <p><a href="http://zssom.sysu.edu.cn/">中山大学中山医学院</a></p>
+              <p><a href="http://www.ipd.org.cn/">中国疾病预防控制中心寄生虫病预防控制所</a></p>
+              <p><a href="http://life.fudan.edu.cn/ ">复旦大学生命科学学院</a></p>
+              <p><a href="http://www.ipd.org.cn/">南方医科大学公共卫生与热带医学学院</a></p>      
+            </div>
+            <div class="col-sm-5">
+              <p><b>资源共享</b></p>
+              <p><a href="http://www.chinaias.cn/wjPart/index.aspx ">中国外来入侵物种数据库</a></p>
+              <p><a href="http://www.iucngisd.org/gisd/">全球入侵物种数据库GISD</a></p>
+              <p><a href="https://www.vectorbase.org/">人类病原体无脊椎动物媒介生物信息资源数据库（VectorBase）</a></p> 
+            </div>
+          </div>
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class=" QRcode-reminder">
+              <p>请关注我们的公众号：</p>
+            </div>
+            <!-- <div class="col-sm-4"> -->
+              <img src="static/pics/QRcode.png" height="105">
+            <!-- </div> -->
+          </div>          
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>Copyright &copy; 2016 <a href="http://www.sysu.edu.cn/2012/cn/index.htm">中山大学</a> &nbsp&nbsp&nbsp
+          联系我们：<a href="mailto:wuzhd@mail2.sysu.edu.cn">wuzhd@mail2.sysu.edu.cn</a></p> 
+          <p>地址：中国广州市中山二路74号中山大学北校区（邮政编码：510080）</p>         
+        </div>
+      </footer>
+    </div>
+{% endblock %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+
+
+<!--{% block footer %}
+<div class="container">
+
+{% block footer_content %}{% endblock %}
+</div>
+{% endblock %}-->
+

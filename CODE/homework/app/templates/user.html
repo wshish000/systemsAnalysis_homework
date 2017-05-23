@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="page-header">
+    <div class="profile-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.name or user.tel %}
+        <p>
+            {% if user.name %}Name:{{ user.name }}<br>{% endif %}
+            {% if user.tel %}
+            Tel: {{user.tel}}<br>
+            {% endif %}
+            {% if user.gender %}
+            Sex: {{user.gender}}
+            {% endif %}
+            {% if user.introduction %}
+            Introduction: {{user.introduction}}
+            {% endif %}
+        </p>
+        {% endif %}
+        <p>上传的文章</p>
+        {% for x in articles %}
+        <div>
+        {{ x.title }}<br>
+        </div>
+        {% endfor %}
+        <p>
+            {% if user == current_user %}
+            <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}

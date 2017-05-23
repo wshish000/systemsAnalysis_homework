@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}添加课题{% endblock %}
+{% block page_content %}
+
+<form class="form-horizontal" method="post">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" name="name" placeholder="ProjectName" autofocus="" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="introduction" class="col-sm-2 control-label">Introduction</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="introduction" name="introduction" autofocus="" required="required" cols=40 rows=4>请输入课题介绍</textarea>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+    <label for="name" class="col-sm-2 control-label">负责团队</label>
+    <div class="col-sm-10">
+    {% for n in participant %}
+    <div class="col-sm-2 ">
+        <label>
+            <input name="a_option" value= "{{ n.name }}" type="radio"> {{ n.name }}
+        </label>
+    </div>
+    {% endfor %}
+	  </div>
+    </div>
+
+
+    <div class="row">
+    <label for="name" class="col-sm-2 control-label">参与团队</label>
+    <div class="col-sm-10">
+    {% for n in participant %}
+    <div class="col-sm-2 ">
+        <label>
+            <input name="b_option" value= "{{ n.name }}" type="checkbox"> {{ n.name }}
+        </label>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+
+    <div class="form-group">
+      <label for="starttime" class="col-sm-2 control-label">开始时间</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="starttime" name="starttime" required="required">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endtime" class="col-sm-2 control-label">结束时间</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="endtime" name="endtime" required="required">
+      </div>
+    </div>
+
+	<center><input class="btn btn-default btn-lg" type="submit" value="Submit"></center>
+</form>
+
+{% endblock %}

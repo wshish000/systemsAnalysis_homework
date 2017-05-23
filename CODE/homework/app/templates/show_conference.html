@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}学术交流{% endblock %}
+{% block page_content %}
+
+<div class="row">
+<div style="margin: 15px 5px 15px 5px;" text-align="left">
+<div class="col-md-3" style="height:500px;overflow-x:hidden;text-align:left;float:left;white-space:nowrap;text-overflow:ellipsis;">
+<ul>
+<li><h3>2016</h3>
+<ul>
+{% for x in conference %}
+{% if x.starttime.year == 2016 %}
+<li><h5><a id="gotop" href="#{{ x.name }}">{{ x.name }}</a></h5></li>
+{% endif %}
+{% endfor %}
+</ul>
+</li>
+</ul>
+<ul>
+<li><h3>2015</h3>
+<ul>
+{% for x in conference %}
+{% if x.starttime.year == 2015 %}
+<li><h5><a id="gotop" href="#{{ x.name }}">{{ x.name }}</a></h5></li>
+{% endif %}
+{% endfor %}
+</ul>
+</li>
+</ul>
+<ul>
+<li><h3>2014</h3>
+<ul>
+{% for x in conference %}
+{% if x.starttime.year == 2014 %}
+<li><h5><a id="gotop" href="#{{ x.name }}">{{ x.name }}</a></h5></li>
+{% endif %}
+{% endfor %}
+</ul>
+</li>
+</ul>
+</div>
+<!-- 代码开始 -->
+<div class="col-md-9" style="height:500px;overflow:auto;">
+{% for x in conference %}
+<a name="{{ x.name }}"></a>
+<div style="height:900px;">
+<h2 style="text-align:center;">{{ x.name }}</h2>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>会议摘要</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ x.spot }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>开始时间</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ x.starttime.year }}-{{ x.starttime.month }}-{{ x.starttime.day }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>结束时间</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ x.endtime.year }}-{{ x.endtime.month }}-{{ x.endtime.day }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <h3>详情链接</h3>
+    </div>
+    <div class="col-md-10">
+        <h3><a href="{{ x.link }}" target="_blank">点击此处</a></h3>
+    </div>
+</div>
+<br>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}管理会议{% endblock %}
+{% block page_content %}
+
+{% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+<h1 text-align: center;><a class="btn btn-default btn-lg" href="{{url_for('conference.add_conference')}}">添加会议</a></h1>
+{% endif %}
+<h1 text-align: center;>会议列表</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>标题</th>
+      {% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+      <th>删除</th>
+      {% endif %}
+      <th class="fr">时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for x in conference %}
+    <tr>
+      <td><a href="{{url_for('conference.conference',id=x.id)}}">{{x.name}}</a></td>
+      {% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+      <td><a href="{{url_for('conference.delete_conference',id=x.id)}}">删除</a></td>
+      {% endif %}
+      <td class="fr">{{ x.starttime }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

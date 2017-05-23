@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}添加公告{% endblock %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+<div class="page-header">
+    <h1>添加公告</h1>
+</div>
+<div class="col-md-8">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

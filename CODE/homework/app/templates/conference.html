@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}会议内容{% endblock %}
+{% block page_content %}
+
+
+<div style="height:900px;">
+<h2 style="text-align:center;">{{ change.name }}</h2>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>会议摘要</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ change.spot }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>开始时间</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ change.starttime.year }}-{{ change.starttime.month }}-{{ change.starttime.day }}</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <h3>结束时间</h3>
+    </div>
+    <div class="col-md-10">
+        <h3>{{ change.endtime.year }}-{{ change.endtime.month }}-{{ change.endtime.day }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <h3>详情链接</h3>
+    </div>
+    <div class="col-md-10">
+        <h3><a href="{{ change.link }}" target="_blank">点击此处</a></h3>
+    </div>
+</div>
+<br>
+</div>
+
+<div class="art_title clearfix">
+  <h1>{{ change.name }}</h1>
+  <p class="info">
+    <small>开始时间:</small>{{ change.starttime }}</p>
+    <small>结束时间:</small>{{ change.endtime }}</p>
+</div>
+<div class="article_content">
+  <p><span style="font-size: 16px;">{{ change.link }}</span></p>
+</div>
+
+{% endblock %}

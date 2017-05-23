@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+
+<h1>课题名称:&nbsp&nbsp{{ change.name }}</h1>
+<form class="" method="post">
+  <h2>删除团队</h2>
+    <div class="row">
+      {% for n in selected %}
+      <div class="col-sm-2 ">
+          <label>
+              <input name="delete_option" value= "{{ n.name }}" type="checkbox"> {{ n.name }}
+          </label>
+      </div>
+      {% endfor %}
+    </div>
+  <h2>增加团队</h2>
+    <div class="row">
+      {% for m in unselected %}
+      <div class="col-sm-2 ">
+          <label>
+              <input name="add_option" value= "{{ m.name }}" type="checkbox"> {{ m.name }}
+          </label>
+      </div>
+      {% endfor %}
+    </div>
+	<input type="submit" value="Submit">
+</form>
+
+{% endblock %}

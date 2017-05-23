@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}编辑团队{% endblock %}
+{% block page_content %}
+
+
+<h1>团队名称:&nbsp&nbsp{{ change.name }}</h1>
+<form class="" method="post">
+  <h2>删除成员</h2>
+    <div class="row">
+      {% for n in selected %}
+      <div class="col-sm-2 ">
+          <label>
+              <input name="delete_option" value= "{{ n.username }}" type="checkbox"> {{ n.username }}
+          </label>
+      </div>
+      {% endfor %}
+    </div>
+  <h2>添加成员</h2>
+    <div class="row">
+      {% for m in unselected %}
+      <div class="col-sm-2 ">
+          <label>
+              <input name="add_option" value= "{{ m.username }}" type="checkbox"> {{ m.username }}
+          </label>
+      </div>
+      {% endfor %}
+    </div>
+	<input type="submit" value="提交">
+</form>
+
+{% endblock %}

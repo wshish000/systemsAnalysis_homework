@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}管理团队{% endblock %}
+{% block page_content %}
+
+{% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+<h1 text-align: center;><a class="btn btn-default btn-lg" href="{{url_for('team.add_team')}}">添加团队</a></h1>
+{% endif %}
+<h1 text-align: center;>团队列表</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>团队名称</th>
+      <th>研究课题</th>
+      <th>人员变更</th>
+      {% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+      <th>删除</th>
+      {% endif %}
+      
+    </tr>
+  </thead>
+  <tbody>
+  	{% for x in team %}
+    <tr>
+      <td><a href="#">{{x.name}}</a></td>
+      <td>
+      {% for y in x.project %}
+      {{ y.name }}
+      {% endfor %}
+      </td>
+      {% if current_user.authorization == "generalad" or current_user.authorization == "superad" %}
+      <td><a href="{{url_for('team.edit_team',id=x.id)}}">人员变更</a></td>
+      <td><a href="{{url_for('team.delete_team',id=x.id)}}">删除</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

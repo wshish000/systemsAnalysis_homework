@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}用户管理{% endblock %}
+{% block page_content %}
+{% if current_user.authorization == "superad" %}
+<div class="page-header">
+    <h1 text-align: center;><a class="btn btn-default btn-lg" href="{{url_for('main.add_user')}}">添加用户</a></h1>
+</div>
+{% endif %}
+{% if generalad %}
+<div class="page-header">
+    <h1 text-align: center;>普通管理员</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>用户名</th>
+      <th>邮箱</th>
+      <th>编辑</th>
+      <th>删除</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in generalad %}
+    <tr>
+      <td>{{ x.username }}</td>
+      <td>{{ x.email }}</td>
+      <td><a href="{{url_for('.edit_profile_1',id=x.id)}}">编辑</a></td>
+      <td><a href="{{url_for('.delete',id=x.id)}}">删除</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+
+<div class="page-header">
+    <h1 text-align: center;>实验室用户</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>用户名</th>
+      <th>邮箱</th>
+      <th>编辑</th>
+      <th>删除</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in labuser %}
+    <tr>
+      <td>{{ x.username }}</td>
+      <td>{{ x.email }}</td>
+      <td><a href="{{url_for('.edit_profile_1',id=x.id)}}">编辑</a></td>
+      <td><a href="{{url_for('.delete',id=x.id)}}">删除</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="page-header">
+    <h1 text-align: center;>普通用户</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>用户名</th>
+      <th>邮箱</th>
+      <th>编辑</th>
+      <th>删除</th>
+      <th>申请提升权限</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in registeruser %}
+    <tr>
+      <td>{{ x.username }}</td>
+      <td>{{ x.email }}</td>
+      <td><a href="{{url_for('.edit_profile_1',id=x.id)}}">编辑</a></td>
+      <td><a href="{{url_for('.delete',id=x.id)}}">删除</a></td>
+      {% if x.target == '1' %}
+      <td>是<a href="{{url_for('.agree',id=x.id)}}">同意</a>&nbsp&nbsp<a href="{{url_for('.refuse',id=x.id)}}">拒绝</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

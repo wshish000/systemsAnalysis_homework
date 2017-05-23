@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}公告详情{% endblock %}
+{% block page_content %}
+
+<div class="art_title clearfix">
+  <h1>{{ change.title }}</h1>
+  <p class="info">
+    <small>发布时间:</small>{{ change.time }}
+</div>
+<div class="article_content">
+  <p><span style="font-size: 16px;">{{ change.content }}</span></p>
+</div>
+
+{% endblock %}
